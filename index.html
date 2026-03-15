@@ -4,45 +4,62 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>FlexStream — Movies, Anime & Videos</title>
-
-<meta property="og:title"        content="FlexStream — Movies, Anime & Videos">
-<meta property="og:description"  content="Watch amazing movies, anime and videos for free!">
-<meta property="og:type"         content="website">
-<meta property="og:site_name"    content="FlexStream">
-<meta property="og:url"          content="https://dinalaminm.github.io/FlexStream/">
-<meta property="og:image"        content="https://dinalaminm.github.io/FlexStream/og-image.jpeg">
-<meta property="og:image:width"  content="1200">
+<meta property="og:title" content="FlexStream — Movies, Anime &amp; Videos">
+<meta property="og:description" content="Watch amazing movies, anime and videos for free!">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FlexStream">
+<meta property="og:url" content="https://dinalaminm.github.io/FlexStream/">
+<meta property="og:image" content="https://dinalaminm.github.io/FlexStream/og-image.jpeg">
+<meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:type"   content="image/jpeg">
-<meta property="og:image:alt"    content="FlexStream — Movies, Anime & Videos">
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="FlexStream — Movies, Anime & Videos">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="FlexStream — Movies, Anime &amp; Videos">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FlexStream — Movies, Anime &amp; Videos">
 <meta name="twitter:description" content="Watch amazing movies, anime and videos for free!">
-<meta name="twitter:image"       content="https://dinalaminm.github.io/FlexStream/og-image.jpeg">
-
+<meta name="twitter:image" content="https://dinalaminm.github.io/FlexStream/og-image.jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --black:#050508; --surface:#0f0f16; --card:#13131c; --card2:#1a1a26;
-  --border:#1e1e2e; --border2:#28283a;
-  --accent:#e63946; --accent2:#ff6b6b; --gold:#ffd166; --teal:#06d6a0; --blue:#4361ee;
-  --text:#f0f0f8; --sub:#a0a0c0; --muted:#5a5a7a;
-  --r:12px; --nav-h:68px;
-}
+:root{--black:#050508;--surface:#0f0f16;--card:#13131c;--card2:#1a1a26;--border:#1e1e2e;--border2:#28283a;--accent:#e63946;--accent2:#ff6b6b;--gold:#ffd166;--teal:#06d6a0;--blue:#4361ee;--text:#f0f0f8;--sub:#a0a0c0;--muted:#5a5a7a;--r:12px;--nav-h:68px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E")}
-
-@keyframes fadein  {from{opacity:0}to{opacity:1}}
-@keyframes slideup {from{transform:translateY(28px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes slideup{from{transform:translateY(28px) scale(.96);opacity:0}to{transform:none;opacity:1}}
 @keyframes slidedown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-@keyframes cardin  {from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes shim    {0%,100%{background:var(--surface);opacity:.5}50%{background:var(--card2);opacity:1}}
-@keyframes pulse   {0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
+@keyframes cardin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes shim{0%,100%{background:var(--surface);opacity:.5}50%{background:var(--card2);opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
 @keyframes appsGlow{0%,100%{box-shadow:0 3px 14px rgba(230,57,70,.45)}50%{box-shadow:0 3px 22px rgba(230,57,70,.8)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ══ AD GATE ══ */
+#adGate{position:fixed;inset:0;z-index:10000;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s ease}
+#adGate.hide{opacity:0;pointer-events:none}
+.ag-loading{display:flex;flex-direction:column;align-items:center;gap:18px}
+.ag-logo{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;background:linear-gradient(130deg,#fff 30%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ag-spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+.ag-loading-text{font-size:12px;color:var(--muted);letter-spacing:1px}
+.ag-ad-wrap{display:none;flex-direction:column;width:100%;height:100%;position:relative}
+.ag-ad-wrap.show{display:flex}
+.ag-ad-zone{flex:1;width:100%;position:relative;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
+.ag-redirect-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:30px;text-align:center;width:100%}
+.ag-redirect-logo{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:3px;background:linear-gradient(130deg,#fff 30%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ag-redirect-icon{width:68px;height:68px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(230,57,70,.5);animation:pulse 1.5s infinite}
+.ag-redirect-title{font-size:17px;font-weight:700;color:var(--text)}
+.ag-redirect-sub{font-size:13px;color:var(--muted);line-height:1.7}
+.ag-redirect-note{font-size:11px;color:var(--muted);opacity:.7;margin-top:4px}
+.ag-bottom{flex-shrink:0;width:100%;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ag-timer-wrap{display:flex;align-items:center;gap:10px;flex:1}
+.ag-timer-svg{flex-shrink:0;transform:rotate(-90deg)}
+.ag-timer-track{fill:none;stroke:rgba(255,255,255,.1);stroke-width:3}
+.ag-timer-fill{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:126;stroke-dashoffset:126;transition:stroke-dashoffset 1s linear}
+.ag-timer-label{font-size:13px;color:var(--sub);line-height:1.4}
+.ag-timer-label b{color:var(--text);font-size:18px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
+.ag-skip-btn{flex-shrink:0;padding:11px 22px;border-radius:50px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:800;letter-spacing:.5px;transition:all .2s;display:flex;align-items:center;gap:7px;box-shadow:0 4px 16px rgba(230,57,70,.4)}
+.ag-skip-btn:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.1)}
+.ag-skip-btn:disabled{background:var(--border2);color:var(--muted);cursor:not-allowed;box-shadow:none}
 
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(5,5,8,.95);backdrop-filter:blur(16px);z-index:8000;display:none;align-items:center;justify-content:center;padding:20px}
@@ -66,13 +83,9 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .hright{display:flex;align-items:center;gap:10px}
 .icon-btn{background:none;border:none;cursor:pointer;color:var(--sub);padding:7px;border-radius:8px;transition:.2s;display:flex;align-items:center}
 .icon-btn:hover{color:var(--text);background:var(--surface)}
-
-/* APPS BUTTON */
 .apps-btn{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:800;letter-spacing:1.2px;padding:7px 14px;border-radius:20px;text-decoration:none;font-family:'DM Sans',sans-serif;white-space:nowrap;animation:appsGlow 2.2s ease-in-out infinite;transition:transform .2s,filter .2s}
 .apps-btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
 .apps-btn:active{transform:scale(.95)}
-
-/* Search */
 .search-bar{padding:0 14px 12px;display:none}
 .search-bar.open{display:block;animation:slidedown .22s ease}
 .search-wrap{position:relative}
@@ -80,8 +93,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .search-input{width:100%;padding:10px 12px 10px 38px;background:var(--surface);border:1px solid var(--border2);color:var(--text);border-radius:50px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:.2s}
 .search-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(230,57,70,.1)}
 .search-input::placeholder{color:var(--muted)}
-
-/* Category Pills */
 .cat-bar-wrap{padding:10px 12px 2px}
 .cat-bar{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px}
 .cat-bar::-webkit-scrollbar{display:none}
@@ -92,14 +103,10 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .cat-pill span,.cat-pill-icon{position:relative;z-index:1}
 .cat-pill-icon{font-size:14px}
 .cat-pill-sk{flex-shrink:0;height:34px;border-radius:50px;animation:shim 1.4s infinite}
-
-/* Banner Ad */
 .ad-banner-slot{width:100%;display:none;flex-direction:column;align-items:center;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:8px 0 6px;overflow:hidden}
 .ad-banner-slot.show{display:flex}
 .ad-slot-label{font-size:9px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
 #bannerAdInner{display:flex;justify-content:center;align-items:center;min-height:50px;width:100%}
-
-/* Home */
 #homeView{padding-bottom:calc(var(--nav-h) + 16px)}
 .section-header{display:flex;align-items:center;justify-content:space-between;padding:16px 14px 10px}
 .section-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
@@ -107,8 +114,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 10px 10px}
 @media(min-width:480px){.video-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:768px){.video-grid{grid-template-columns:repeat(4,1fr)}}
-
-/* Video Card */
 .vcard{background:var(--card);border-radius:var(--r);overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;animation:cardin .35s ease both}
 .vcard:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.55)}
 .vcard:active{transform:scale(.97)}
@@ -126,8 +131,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .thumb-views{position:absolute;bottom:5px;right:6px;background:rgba(0,0,0,.72);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;display:flex;align-items:center;gap:3px;backdrop-filter:blur(4px)}
 .vcard-info{padding:9px 10px 11px}
 .vcard-title{font-size:12px;font-weight:600;line-height:1.4;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
-/* Skeleton */
 .sk-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
 @media(min-width:480px){.sk-grid{grid-template-columns:repeat(3,1fr)}}
 .sk-card{background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
@@ -137,16 +140,12 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .sk-line.w70{width:70%}.sk-line.w50{width:50%}
 .empty-msg{text-align:center;padding:60px 20px;color:var(--muted)}
 .empty-msg .ei{font-size:44px;margin-bottom:12px}
-
-/* Player */
 #playerView{display:none;padding-bottom:calc(var(--nav-h) + 16px)}
 #playerView.show{display:block;animation:fadein .3s ease}
 .player-back{display:flex;align-items:center;gap:8px;padding:12px 14px 10px;cursor:pointer;color:var(--sub);font-size:14px;font-weight:600;background:none;border:none;font-family:'DM Sans',sans-serif;transition:.2s}
 .player-back:hover{color:var(--text)}
 .player-video-wrap{background:#000;width:100%;position:relative}
 #mainVideo{width:100%;aspect-ratio:16/9;display:block;background:#000;object-fit:contain}
-
-/* Ad Overlay */
 #adOverlay{display:none;position:absolute;inset:0;z-index:50;background:#000;flex-direction:column;align-items:center;justify-content:center}
 #adOverlay.show{display:flex}
 #adOverlayZone{width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
@@ -156,8 +155,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .ad-skip-btn:hover:not(:disabled){background:rgba(230,57,70,.9);border-color:var(--accent)}
 .ad-skip-btn:disabled{opacity:.5;cursor:not-allowed}
 .ad-countdown{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:5px;padding:2px 7px;font-size:11px;min-width:22px}
-
-/* Player Info */
 .player-info{padding:14px 14px 12px}
 .player-cat{display:inline-block;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
 .player-title{font-size:17px;font-weight:700;line-height:1.35;margin-bottom:6px}
@@ -168,8 +165,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .p-btn-share:hover{border-color:var(--teal);color:var(--teal)}
 .p-btn-dl{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(230,57,70,.3)}
 .p-btn-dl:hover{background:#c1121f;transform:translateY(-1px)}
-
-/* Suggested */
 .divider{height:1px;background:var(--border);margin:16px 14px 14px}
 .sug-label{padding:0 14px 10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .sug-list{display:flex;flex-direction:column;gap:10px;padding:0 10px}
@@ -182,8 +177,6 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .sug-title{font-size:12px;font-weight:600;line-height:1.4;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
 .sug-cat{display:inline-block;padding:2px 6px;border-radius:5px;font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase}
 .sug-views{font-size:10px;color:var(--muted);margin-top:4px}
-
-/* Bottom Nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(5,5,8,.96);backdrop-filter:blur(24px) saturate(1.4);border-top:1px solid var(--border);display:flex;padding:0 4px env(safe-area-inset-bottom,0px);z-index:400}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;color:var(--muted);padding:8px 0 6px;transition:color .2s;position:relative}
 .bnav-icon{width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all .25s cubic-bezier(.34,1.56,.64,1)}
@@ -192,13 +185,46 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .bnav-item.active .bnav-icon{background:rgba(230,57,70,.14);transform:translateY(-2px) scale(1.1)}
 .bnav-item.active .bnav-icon svg{filter:drop-shadow(0 2px 8px rgba(230,57,70,.6))}
 .bnav-item.active::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--accent);box-shadow:0 0 6px var(--accent)}
-
-/* Toast */
 #toast{position:fixed;bottom:calc(var(--nav-h)+10px);left:50%;transform:translateX(-50%) translateY(16px);background:var(--card);color:var(--text);border:1px solid var(--border2);padding:11px 22px;border-radius:50px;font-size:13px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.5);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);z-index:7000;pointer-events:none;white-space:nowrap}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
+
+<!-- ✅ AD GATE — সাইট লোডের আগে দেখাবে -->
+<div id="adGate">
+  <div class="ag-loading" id="agLoading">
+    <div class="ag-logo">FlexStream</div>
+    <div class="ag-spinner"></div>
+    <div class="ag-loading-text">Loading...</div>
+  </div>
+  <div class="ag-ad-wrap" id="agAdWrap">
+    <div class="ag-ad-zone">
+      <div class="ag-redirect-screen">
+        <div class="ag-redirect-logo">FlexStream</div>
+        <div class="ag-redirect-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+        <div class="ag-redirect-title">বিজ্ঞাপন লোড হচ্ছে...</div>
+        <div class="ag-redirect-sub">নতুন ট্যাবে বিজ্ঞাপন খুলেছে।<br>দেখার পর এখানে ফিরে আসুন।</div>
+        <div class="ag-redirect-note">Skip করতে নিচের বাটন চাপুন</div>
+      </div>
+    </div>
+    <div class="ag-bottom">
+      <div class="ag-timer-wrap">
+        <svg class="ag-timer-svg" width="32" height="32" viewBox="0 0 42 42">
+          <circle class="ag-timer-track" cx="21" cy="21" r="20"/>
+          <circle class="ag-timer-fill" id="agTimerCircle" cx="21" cy="21" r="20"/>
+        </svg>
+        <div class="ag-timer-label"><b id="agTimerNum">5</b> সেকেন্ড পরে Skip</div>
+      </div>
+      <button class="ag-skip-btn" id="agSkipBtn" disabled onclick="closeAdGate()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"/></svg>
+        Skip
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- WELCOME MODAL -->
 <div class="modal-bg" id="welcomeModal">
@@ -224,9 +250,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="brand">FlexStream</div>
     <div class="hright">
       <button class="icon-btn" id="searchToggle" aria-label="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
       <a href="#" class="apps-btn" id="appsBtn" target="_blank" rel="noopener">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -236,13 +260,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   </div>
   <div class="search-bar" id="searchBar">
     <div class="search-wrap">
-      <span class="search-ico">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-      </span>
-      <input type="search" class="search-input" id="searchInput"
-        placeholder="Search movies, anime..." oninput="handleSearch(this.value)">
+      <span class="search-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+      <input type="search" class="search-input" id="searchInput" placeholder="Search movies, anime..." oninput="handleSearch(this.value)">
     </div>
   </div>
   <div class="cat-bar-wrap">
@@ -257,10 +276,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 
 <!-- HOME VIEW -->
 <div id="homeView">
-  <div class="ad-banner-slot" id="bannerAdSlot">
-    <div class="ad-slot-label"></div>
-    <div id="bannerAdInner"></div>
-  </div>
+  <div class="ad-banner-slot" id="bannerAdSlot"><div class="ad-slot-label"></div><div id="bannerAdInner"></div></div>
   <div id="gridContainer">
     <div class="sk-grid" id="skeletonGrid">
       <div class="sk-card"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line w70"></div><div class="sk-line w50"></div></div></div>
@@ -274,9 +290,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 <!-- PLAYER VIEW -->
 <div id="playerView">
   <button class="player-back" id="backBtn">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M19 12H5M12 5l-7 7 7 7"/>
-    </svg>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Back
   </button>
   <div class="player-video-wrap">
@@ -294,9 +308,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
     <div class="player-cat" id="playerCat"></div>
     <div class="player-title" id="playerTitle">Loading...</div>
     <div class="player-views" id="playerViews">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-      </svg>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       <span id="playerViewsText">0 views</span>
     </div>
     <div class="player-actions">
@@ -318,33 +330,15 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 <!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="bnav-item active" id="bn-movie" onclick="filterAndGo('Movie')">
-    <div class="bnav-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="4" width="20" height="16" rx="3"/>
-        <path d="M7 4v16M17 4v16M2 9h5M17 9h5M2 15h5M17 15h5"/>
-      </svg>
-    </div>
+    <div class="bnav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M7 4v16M17 4v16M2 9h5M17 9h5M2 15h5M17 15h5"/></svg></div>
     Movies
   </button>
   <button class="bnav-item" id="bn-anime" onclick="filterAndGo('Anime')">
-    <div class="bnav-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"/>
-        <path d="M8 9.5c0-1 .7-2 2-2s2 1.5 2 1.5 1-1.5 2-1.5 2 1 2 2"/>
-        <path d="M9 15c1 1 5 1 6 0"/>
-        <circle cx="9.5" cy="11" r=".5" fill="currentColor"/>
-        <circle cx="14.5" cy="11" r=".5" fill="currentColor"/>
-      </svg>
-    </div>
+    <div class="bnav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 9.5c0-1 .7-2 2-2s2 1.5 2 1.5 1-1.5 2-1.5 2 1 2 2"/><path d="M9 15c1 1 5 1 6 0"/><circle cx="9.5" cy="11" r=".5" fill="currentColor"/><circle cx="14.5" cy="11" r=".5" fill="currentColor"/></svg></div>
     Anime
   </button>
   <button class="bnav-item" id="bn-videos" onclick="filterAndGo('Videos')">
-    <div class="bnav-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polygon points="23 7 16 12 23 17 23 7"/>
-        <rect x="1" y="5" width="15" height="14" rx="2"/>
-      </svg>
-    </div>
+    <div class="bnav-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
     Videos
   </button>
 </nav>
@@ -368,7 +362,8 @@ const app = initializeApp({
 const db = getFirestore(app);
 
 let allVideos=[], currentCat='all', currentQ='', AppSettings={}, dynamicCats=[], adCfg={}, pendingVideo=null, adTimer=null;
-let entryAdFired = false; // ✅ পেজ লোডে একবারই fire হবে
+let gateDone = false;
+let gateInterval = null;
 
 const $=id=>document.getElementById(id);
 
@@ -382,52 +377,90 @@ function makePlaceholder(title,cat){
   return`data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${a}"/><stop offset="100%" stop-color="${b}"/></linearGradient></defs><rect width="320" height="180" fill="url(#g)"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="54" font-weight="bold" fill="rgba(255,255,255,0.2)">${init}</text><text x="50%" y="76%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.45)" font-weight="700" letter-spacing="2">${cat.toUpperCase()}</text></svg>`)}`;
 }
 
-/* ══════════════════════════════════════════
-   ✅ ENTRY AD — পেজ লোড হলে Direct Link fire
-   Admin → Ad Manager → Popunder ON থাকলে কাজ করবে
-   Cooldown শেষ হলে পরের বার আবার দেখাবে
-══════════════════════════════════════════ */
-function triggerEntryAd() {
-  if (entryAdFired) return;            // একই session-এ একবারই
-  if (!adCfg.popunderEnabled) return;  // Admin থেকে OFF থাকলে কিছু হবে না
-  if (!adCfg.directLink) return;       // লিংক না থাকলে skip
+/* ════════════════════════════════════════
+   ✅ AD GATE ENGINE
+   সাইটে ঢুকলে আগে Ad Gate দেখাবে।
+   Admin → Popunder ON + Direct Link থাকলে:
+     → নতুন ট্যাবে Ad খুলবে
+     → Countdown শেষে Skip করা যাবে
+   Popunder OFF থাকলে: Gate সরাসরি বন্ধ
+   Cooldown শেষ না হলে: Gate দেখাবে না
+════════════════════════════════════════ */
+function startAdGate(cfg) {
+  if (gateDone) return;
 
-  const coolMs = (parseInt(adCfg.popunderCooldown) || 60) * 1000;
-  const last   = parseInt(sessionStorage.getItem('_entry_pu_t') || '0');
-  if (Date.now() - last < coolMs) return; // Cooldown শেষ না হলে skip
+  const coolMs = (parseInt(cfg.popunderCooldown) || 60) * 1000;
+  const last   = parseInt(sessionStorage.getItem('_gate_t') || '0');
 
-  entryAdFired = true;
-  sessionStorage.setItem('_entry_pu_t', String(Date.now()));
-  try { window.open(adCfg.directLink, '_blank'); } catch(e) {}
+  // Popunder OFF বা Cooldown শেষ না হলে → Gate বন্ধ
+  if (!cfg.popunderEnabled || !cfg.directLink || (Date.now() - last < coolMs)) {
+    dismissGate();
+    return;
+  }
+
+  gateDone = true;
+  sessionStorage.setItem('_gate_t', String(Date.now()));
+
+  // Loading সরাও, Ad screen দেখাও
+  $('agLoading').style.display = 'none';
+  $('agAdWrap').classList.add('show');
+
+  // Direct Link নতুন ট্যাবে খোলো
+  try { window.open(cfg.directLink, '_blank'); } catch(e) {}
+
+  // Countdown
+  const skipDelay = parseInt(cfg.skipDelay) || 5;
+  const timerNum  = $('agTimerNum');
+  const skipBtn   = $('agSkipBtn');
+  const circle    = $('agTimerCircle');
+
+  timerNum.textContent = skipDelay;
+  skipBtn.disabled = true;
+  circle.style.transition = 'none';
+  circle.style.strokeDashoffset = '126';
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    circle.style.transition = `stroke-dashoffset ${skipDelay}s linear`;
+    circle.style.strokeDashoffset = '0';
+  }));
+
+  let rem = skipDelay;
+  clearInterval(gateInterval);
+  gateInterval = setInterval(() => {
+    rem--;
+    timerNum.textContent = rem;
+    if (rem <= 0) {
+      clearInterval(gateInterval);
+      skipBtn.disabled = false;
+      skipBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"/></svg> সাইটে যান`;
+    }
+  }, 1000);
+}
+
+window.closeAdGate = () => {
+  clearInterval(gateInterval);
+  const g = $('adGate');
+  g.classList.add('hide');
+  setTimeout(() => { g.style.display = 'none'; }, 500);
+};
+
+function dismissGate() {
+  gateDone = true;
+  $('adGate').style.display = 'none';
 }
 
 /* ══ AD ENGINE ══ */
 function injectScript(container,html){
-  if(!html||!container)return;
-  container.innerHTML='';
+  if(!html||!container)return;container.innerHTML='';
   const wrap=document.createElement('div');wrap.innerHTML=html;
   Array.from(wrap.childNodes).forEach(node=>{
-    if(node.nodeName==='SCRIPT'){
-      const s=document.createElement('script');s.type=node.type||'text/javascript';
-      if(node.src)s.src=node.src;else s.textContent=node.textContent;
-      if(node.dataset?.cfasync!==undefined)s.dataset.cfasync=node.dataset.cfasync;
-      container.appendChild(s);
-    }else container.appendChild(node.cloneNode(true));
+    if(node.nodeName==='SCRIPT'){const s=document.createElement('script');s.type=node.type||'text/javascript';if(node.src)s.src=node.src;else s.textContent=node.textContent;if(node.dataset?.cfasync!==undefined)s.dataset.cfasync=node.dataset.cfasync;container.appendChild(s);}
+    else container.appendChild(node.cloneNode(true));
   });
 }
 function applySocialBar(script){if(!script)return;let el=document.getElementById('_sb_wrap');if(!el){el=document.createElement('div');el.id='_sb_wrap';document.body.appendChild(el);}injectScript(el,script)}
 function applyBanner(script){const slot=$('bannerAdSlot'),inner=$('bannerAdInner');if(!slot||!inner)return;if(!script){slot.classList.remove('show');return;}slot.classList.add('show');injectScript(inner,script)}
-
-function triggerPopunder(url){
-  // ভিডিও ক্লিকেও popunder — আলাদা cooldown key ব্যবহার করে
-  if(!url)return;
-  const coolMs=(parseInt(adCfg.popunderCooldown)||60)*1000;
-  const last=parseInt(sessionStorage.getItem('_pu_t')||'0');
-  if(Date.now()-last<coolMs)return;
-  sessionStorage.setItem('_pu_t',String(Date.now()));
-  try{window.open(url,'_blank')}catch(e){}
-}
-
+function triggerPopunder(url){if(!url)return;const coolMs=(parseInt(adCfg.popunderCooldown)||60)*1000;const last=parseInt(sessionStorage.getItem('_pu_t')||'0');if(Date.now()-last<coolMs)return;sessionStorage.setItem('_pu_t',String(Date.now()));try{window.open(url,'_blank')}catch(e){}}
 function showOverlay(script){
   const overlay=$('adOverlay'),zone=$('adOverlayZone'),skipBtn=$('adSkipBtn'),timerEl=$('adTimer'),skipText=$('adSkipText');
   if(script)injectScript(zone,script);else zone.innerHTML=`<div style="color:#5a5a7a;text-align:center;font-size:13px;font-family:sans-serif"><div style="font-size:40px;margin-bottom:10px">📢</div>Advertisement</div>`;
@@ -437,25 +470,14 @@ function showOverlay(script){
 }
 window.skipAd=()=>{clearInterval(adTimer);$('adOverlay').classList.remove('show');$('adTimer').style.display='inline-flex';if(pendingVideo){startVideoPlayback(pendingVideo);pendingVideo=null}};
 window.skipAdBtn=()=>{window.skipAd();history.replaceState({view:'player'},'')};
-
-function applyAdConfig(cfg){
-  adCfg=cfg||{};
-  if(cfg.socialBarEnabled&&cfg.socialBarScript)applySocialBar(cfg.socialBarScript);
-  if(cfg.bannerEnabled&&cfg.bannerScript)applyBanner(cfg.bannerScript);
-  else if(!cfg.bannerEnabled)applyBanner(null);
-  // ✅ Ad config লোড হলেই Entry Ad চেক করো
-  triggerEntryAd();
-}
+function applyAdConfig(cfg){adCfg=cfg||{};if(cfg.socialBarEnabled&&cfg.socialBarScript)applySocialBar(cfg.socialBarScript);if(cfg.bannerEnabled&&cfg.bannerScript)applyBanner(cfg.bannerScript);else if(!cfg.bannerEnabled)applyBanner(null);}
 
 /* ══ CATEGORY PILLS ══ */
 const catEmoji={Movie:'🎬',Anime:'🌸',Videos:'🎞️'};
 function buildCategoryPills(cats){
   const bar=$('catBar');bar.innerHTML='';
-  const allPill=document.createElement('button');allPill.className='cat-pill'+(currentCat==='all'?' active':'');allPill.dataset.cat='all';
-  allPill.innerHTML=`<span class="cat-pill-icon">✨</span><span>All</span>`;allPill.onclick=()=>filterCat('all',allPill);bar.appendChild(allPill);
-  cats.forEach(cat=>{const name=typeof cat==='object'?cat.name:cat;const emoji=typeof cat==='object'?(cat.emoji||catEmoji[name]||'📁'):(catEmoji[name]||'📁');
-    const pill=document.createElement('button');pill.className='cat-pill'+(currentCat===name?' active':'');pill.dataset.cat=name;
-    pill.innerHTML=`<span class="cat-pill-icon">${emoji}</span><span>${name}</span>`;pill.onclick=()=>filterCat(name,pill);bar.appendChild(pill);});
+  const allPill=document.createElement('button');allPill.className='cat-pill'+(currentCat==='all'?' active':'');allPill.dataset.cat='all';allPill.innerHTML=`<span class="cat-pill-icon">✨</span><span>All</span>`;allPill.onclick=()=>filterCat('all',allPill);bar.appendChild(allPill);
+  cats.forEach(cat=>{const name=typeof cat==='object'?cat.name:cat;const emoji=typeof cat==='object'?(cat.emoji||catEmoji[name]||'📁'):(catEmoji[name]||'📁');const pill=document.createElement('button');pill.className='cat-pill'+(currentCat===name?' active':'');pill.dataset.cat=name;pill.innerHTML=`<span class="cat-pill-icon">${emoji}</span><span>${name}</span>`;pill.onclick=()=>filterCat(name,pill);bar.appendChild(pill);});
 }
 
 /* ══ RENDER GRID ══ */
@@ -480,8 +502,7 @@ async function incrementView(id){try{await updateDoc(doc(db,'videos',id),{views:
 function openPlayer(video){
   pendingVideo=video;
   const catEl=$('playerCat');catEl.textContent=video.category;catEl.className=`player-cat ${catClass(video.category)}`;
-  $('playerTitle').textContent=video.title;
-  const local=allVideos.find(v=>v.id===video.id);
+  $('playerTitle').textContent=video.title;const local=allVideos.find(v=>v.id===video.id);
   $('playerViewsText').textContent=fmtViews(local?.views||video.views||0);
   $('dlBtn').href=video.downloadUrl||'#';
   $('shareBtn').onclick=()=>{if(navigator.share)navigator.share({title:video.title,url:location.href});else{navigator.clipboard?.writeText(location.href);showToast('🔗 Link copied!')}};
@@ -489,11 +510,8 @@ function openPlayer(video){
   const others=allVideos.filter(v=>v.id!==video.id&&v.category!==video.category).sort(()=>Math.random()-.5).slice(0,3);
   $('sugList').innerHTML=[...same,...others].slice(0,10).map(sv=>{const fb=makePlaceholder(sv.title,sv.category);const ts=sv.thumbnailUrl||fb;return`<div class="sug-card" data-id="${sv.id}"><div class="sug-thumb"><img src="${ts}" alt="${sv.title}" loading="lazy" onerror="this.src='${fb}'"></div><div class="sug-info"><div class="sug-title">${sv.title}</div><div><span class="sug-cat ${catClass(sv.category)}">${sv.category}</span></div>${(sv.views||0)>0?`<div class="sug-views">${fmtViews(sv.views)}</div>`:''}</div></div>`;}).join('')||`<p style="padding:20px;color:var(--muted);font-size:13px;text-align:center">No suggestions</p>`;
   $('sugList').onclick=e=>{const card=e.target.closest('.sug-card');if(!card)return;const v=allVideos.find(x=>x.id===card.dataset.id);if(v){openPlayer(v);window.scrollTo({top:0,behavior:'smooth'})}};
-  $('homeView').style.display='none';$('playerView').classList.add('show');
-  window.scrollTo({top:0,behavior:'instant'});
-  document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
-  pushPlayerState();
-  // ✅ ভিডিও ক্লিকেও popunder (আলাদা cooldown)
+  $('homeView').style.display='none';$('playerView').classList.add('show');window.scrollTo({top:0,behavior:'instant'});
+  document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));pushPlayerState();
   if(adCfg.popunderEnabled&&adCfg.directLink)triggerPopunder(adCfg.directLink);
   if(adCfg.overlayEnabled)showOverlay(adCfg.overlayScript||null);
   else{pendingVideo=null;startVideoPlayback(video);}
@@ -501,8 +519,7 @@ function openPlayer(video){
 
 function startVideoPlayback(video){
   const vid=$('mainVideo');vid.pause();vid.src=video.videoUrl;vid.load();vid.play().catch(()=>{});
-  incrementView(video.id);const local=allVideos.find(v=>v.id===video.id);
-  if(local)local.views=(local.views||0)+1;
+  incrementView(video.id);const local=allVideos.find(v=>v.id===video.id);if(local)local.views=(local.views||0)+1;
   $('playerViewsText').textContent=fmtViews(local?.views||video.views||0);
 }
 
@@ -521,8 +538,7 @@ function _closePlayer(){
   const vid=$('mainVideo');vid.pause();vid.src='';
   $('playerView').classList.remove('show');$('homeView').style.display='';
   document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
-  const navMap={Movie:'bn-movie',Anime:'bn-anime',Videos:'bn-videos'};
-  const activeNav=navMap[currentCat];if(activeNav)$(activeNav)?.classList.add('active');
+  const navMap={Movie:'bn-movie',Anime:'bn-anime',Videos:'bn-videos'};const activeNav=navMap[currentCat];if(activeNav)$(activeNav)?.classList.add('active');
   renderGrid();
 }
 
@@ -532,47 +548,46 @@ $('backBtn').onclick=window.goHome;
 window.filterCat=(cat,btn)=>{currentCat=cat;document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));if(btn)btn.classList.add('active');renderGrid()};
 window.filterAndGo=cat=>{
   clearInterval(adTimer);$('adOverlay').classList.remove('show');$('adTimer').style.display='inline-flex';pendingVideo=null;
-  const vid=$('mainVideo');vid.pause();vid.src='';
-  $('playerView').classList.remove('show');$('homeView').style.display='';currentCat=cat;
+  const vid=$('mainVideo');vid.pause();vid.src='';$('playerView').classList.remove('show');$('homeView').style.display='';currentCat=cat;
   const pill=document.querySelector(`.cat-pill[data-cat="${cat}"]`);
   document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));if(pill)pill.classList.add('active');
   document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
-  const m={Movie:'bn-movie',Anime:'bn-anime',Videos:'bn-videos'};if(m[cat])$(m[cat])?.classList.add('active');
-  renderGrid();
+  const m={Movie:'bn-movie',Anime:'bn-anime',Videos:'bn-videos'};if(m[cat])$(m[cat])?.classList.add('active');renderGrid();
 };
 
 window.handleSearch=q=>{currentQ=q.toLowerCase();renderGrid()};
 $('searchToggle').onclick=()=>{$('searchBar').classList.toggle('open');if($('searchBar').classList.contains('open'))$('searchInput').focus()};
 $('enterBtn').onclick=()=>{$('welcomeModal').classList.remove('show');localStorage.setItem('fs_v','1')};
 
-/* ══ FIREBASE LOAD ══ */
+/* ══ FIREBASE ══ */
 getDoc(doc(db,'settings','config')).then(snap=>{
   if(snap.exists()){
     AppSettings=snap.data();
     $('fbPageLink').href=AppSettings.facebookPage||'#';
     $('fbGroupLink').href=AppSettings.facebookGroup||'#';
-    if(AppSettings.apkLink) $('appsBtn').href=AppSettings.apkLink;
-    dynamicCats=AppSettings.categories?.length
-      ?AppSettings.categories
-      :[{name:'Movie',emoji:'🎬'},{name:'Anime',emoji:'🌸'},{name:'Videos',emoji:'🎞️'}];
-  }else{
-    dynamicCats=[{name:'Movie',emoji:'🎬'},{name:'Anime',emoji:'🌸'},{name:'Videos',emoji:'🎞️'}];
-  }
+    if(AppSettings.apkLink)$('appsBtn').href=AppSettings.apkLink;
+    dynamicCats=AppSettings.categories?.length?AppSettings.categories:[{name:'Movie',emoji:'🎬'},{name:'Anime',emoji:'🌸'},{name:'Videos',emoji:'🎞️'}];
+  }else{dynamicCats=[{name:'Movie',emoji:'🎬'},{name:'Anime',emoji:'🌸'},{name:'Videos',emoji:'🎞️'}];}
   buildCategoryPills(dynamicCats);
   if(!localStorage.getItem('fs_v'))$('welcomeModal').classList.add('show');
 });
 
-/* ✅ Ad config realtime — লোড হলেই Entry Ad fire হবে */
+/* ✅ Ad config লোড হলে Gate চালু হবে */
 onSnapshot(doc(db,'settings','ads'),snap=>{
-  if(snap.exists()) applyAdConfig(snap.data());
+  if(snap.exists()){
+    applyAdConfig(snap.data());
+    startAdGate(snap.data()); // Gate check
+  } else {
+    dismissGate();
+  }
 });
 
-onSnapshot(collection(db,'videos'),snap=>{
-  allVideos=[];snap.forEach(d=>allVideos.push({id:d.id,...d.data()}));renderGrid();
-});
-
+onSnapshot(collection(db,'videos'),snap=>{allVideos=[];snap.forEach(d=>allVideos.push({id:d.id,...d.data()}));renderGrid()});
 document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
 $('bn-movie')?.classList.add('active');
+
+// Fallback — ৬ সেকেন্ডে config না আসলে Gate বন্ধ
+setTimeout(()=>{ if(!gateDone) dismissGate(); }, 6000);
 </script>
 </body>
 </html>
