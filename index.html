@@ -3,9 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>FlexStream</title>
-<meta property="og:title" content="FlexStream — Movies, Anime & Videos">
-<meta property="og:description" content="Watch amazing movies, anime and videos for free!">
+<title>FlexStream — Movies, Anime & Videos</title>
+
+<!-- ✅ OG / Social Share Meta Tags -->
+<meta property="og:title"        content="FlexStream — Movies, Anime & Videos">
+<meta property="og:description"  content="Watch amazing movies, anime and videos for free!">
+<meta property="og:type"         content="website">
+<meta property="og:site_name"    content="FlexStream">
+<meta property="og:url"          content="https://dinalaminm.github.io/FlexStream/">
+<meta property="og:image"        content="https://i.ibb.co.com/zVmdGbrj/620596b91fc5c4fcecfb33eb8fbf14c7.jpg">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type"   content="image/jpeg">
+<meta property="og:image:alt"    content="FlexStream — Movies, Anime & Videos">
+
+<!-- WhatsApp / Telegram / Twitter এ বড় ইমেজ দেখাবে -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="FlexStream — Movies, Anime & Videos">
+<meta name="twitter:description" content="Watch amazing movies, anime and videos for free!">
+<meta name="twitter:image"       content="https://i.ibb.co.com/zVmdGbrj/620596b91fc5c4fcecfb33eb8fbf14c7.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
@@ -385,12 +402,10 @@ body::after {
 
 <!-- ══ HOME VIEW ══ -->
 <div id="homeView">
-  <!-- Banner Ad — shown/hidden based on Firestore config -->
   <div class="ad-banner-slot" id="bannerAdSlot">
     <div class="ad-slot-label"></div>
     <div id="bannerAdInner"></div>
   </div>
-  <!-- Video Grid -->
   <div id="gridContainer">
     <div class="sk-grid" id="skeletonGrid">
       <div class="sk-card"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line w70"></div><div class="sk-line w50"></div></div></div>
@@ -411,7 +426,6 @@ body::after {
   </button>
 
   <div class="player-video-wrap">
-    <!-- Ad Overlay — script injected from Firestore -->
     <div id="adOverlay">
       <div class="ad-tag">📢 AD</div>
       <div id="adOverlayZone"></div>
@@ -511,7 +525,7 @@ let currentCat   = 'all';
 let currentQ     = '';
 let AppSettings  = {};
 let dynamicCats  = [];
-let adCfg        = {};   // Firestore: settings/ads
+let adCfg        = {};
 let pendingVideo = null;
 let adTimer      = null;
 
@@ -559,23 +573,7 @@ function makePlaceholder(title, cat) {
   )}`;
 }
 
-/* ══════════════════════════════════
-   AD ENGINE
-   Firestore doc: settings/ads
-   Fields:
-     socialBarScript  — full <script> HTML
-     bannerScript     — full <script> HTML
-     overlayScript    — full <script> HTML
-     directLink       — Adsterra Direct Link URL
-     socialBarEnabled — bool
-     bannerEnabled    — bool
-     overlayEnabled   — bool
-     popunderEnabled  — bool
-     skipDelay        — number (seconds, default 5)
-     popunderCooldown — number (seconds, default 60)
-══════════════════════════════════ */
-
-/** Safely inject ad HTML + re-execute <script> tags */
+/* ══ AD ENGINE ══ */
 function injectScript(container, html) {
   if (!html || !container) return;
   container.innerHTML = '';
@@ -596,7 +594,6 @@ function injectScript(container, html) {
   });
 }
 
-/** Social Bar — appended to <body> once */
 function applySocialBar(script) {
   if (!script) return;
   let el = document.getElementById('_sb_wrap');
@@ -604,7 +601,6 @@ function applySocialBar(script) {
   injectScript(el, script);
 }
 
-/** Banner Ad — show/hide slot */
 function applyBanner(script) {
   const slot  = $('bannerAdSlot');
   const inner = $('bannerAdInner');
@@ -614,7 +610,6 @@ function applyBanner(script) {
   injectScript(inner, script);
 }
 
-/** Popunder / Direct Link with session cooldown */
 function triggerPopunder(url) {
   if (!url) return;
   const coolMs = (parseInt(adCfg.popunderCooldown) || 60) * 1000;
@@ -624,7 +619,6 @@ function triggerPopunder(url) {
   try { window.open(url, '_blank'); } catch (e) {}
 }
 
-/** Show overlay with countdown before video */
 function showOverlay(script) {
   const overlay  = $('adOverlay');
   const zone     = $('adOverlayZone');
@@ -642,7 +636,6 @@ function showOverlay(script) {
   }
 
   overlay.classList.add('show');
-  // History API — back চাপলে overlay skip হবে
   pushOverlayState();
   skipBtn.disabled = true;
   timerEl.style.display = 'inline-flex';
@@ -664,7 +657,6 @@ function showOverlay(script) {
   }, 1000);
 }
 
-/** Skip ad — overlay বন্ধ করে video চালু করে */
 window.skipAd = () => {
   clearInterval(adTimer);
   $('adOverlay').classList.remove('show');
@@ -672,14 +664,11 @@ window.skipAd = () => {
   if (pendingVideo) { startVideoPlayback(pendingVideo); pendingVideo = null; }
 };
 
-/** Skip button onclick — history এও reflect করতে হবে */
 window.skipAdBtn = () => {
   window.skipAd();
-  // overlay state টা history থেকে সরাই (player state এ ফেরায়)
   history.replaceState({ view: 'player' }, '');
 };
 
-/** Apply ad config from Firestore snapshot */
 function applyAdConfig(cfg) {
   adCfg = cfg || {};
   if (cfg.socialBarEnabled && cfg.socialBarScript) applySocialBar(cfg.socialBarScript);
@@ -778,7 +767,6 @@ async function incrementView(id) {
 function openPlayer(video) {
   pendingVideo = video;
 
-  // Fill UI
   const catEl = $('playerCat');
   catEl.textContent = video.category;
   catEl.className   = `player-cat ${catClass(video.category)}`;
@@ -791,7 +779,6 @@ function openPlayer(video) {
     else { navigator.clipboard?.writeText(location.href); showToast('🔗 Link copied!'); }
   };
 
-  // Suggested videos
   const same   = allVideos.filter(v => v.id !== video.id && v.category === video.category)
                           .sort((a,b) => (b.views||0)-(a.views||0)).slice(0, 7);
   const others = allVideos.filter(v => v.id !== video.id && v.category !== video.category)
@@ -820,16 +807,13 @@ function openPlayer(video) {
     if (v) { openPlayer(v); window.scrollTo({ top: 0, behavior: 'smooth' }); }
   };
 
-  // Switch to player view
   $('homeView').style.display = 'none';
   $('playerView').classList.add('show');
   window.scrollTo({ top: 0, behavior: 'instant' });
   document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
 
-  // History API — ফোনের back button ধরার জন্য
   pushPlayerState();
 
-  // ── Fire Ads ──
   if (adCfg.popunderEnabled && adCfg.directLink) triggerPopunder(adCfg.directLink);
 
   if (adCfg.overlayEnabled) {
@@ -851,23 +835,7 @@ function startVideoPlayback(video) {
   $('playerViewsText').textContent = fmtViews(local?.views || video.views || 0);
 }
 
-/* ══ HISTORY / HARDWARE BACK BUTTON ══
-   Stack logic:
-     'home'   → home view দেখাচ্ছে
-     'player' → player view দেখাচ্ছে
-     'overlay'→ ad overlay দেখাচ্ছে
-
-   Page load এ history stack:
-     [base] ← always kept so browser doesn't close the app
-
-   ভিডিও open হলে pushState('player')
-   Hardware back চাপলে popstate fire হয়:
-     - overlay open থাকলে → overlay বন্ধ করে video play
-     - player open থাকলে → home এ ফেরায়
-     - home এ থাকলে → pushState আবার দিয়ে app বন্ধ হওয়া আটকায়
-══════════════════════════════════════ */
-
-// Page load এ base state push করি — এটা থাকলে browser app close করে না
+/* ══ HISTORY / HARDWARE BACK BUTTON ══ */
 history.replaceState({ view: 'home' }, '');
 
 function pushPlayerState() {
@@ -879,30 +847,19 @@ function pushOverlayState() {
 }
 
 window.addEventListener('popstate', e => {
-  const view = e.state?.view;
-
-  // ── Overlay খোলা আছে → skip/close overlay, video play করো ──
   if ($('adOverlay').classList.contains('show')) {
     window.skipAd();
-    // player state এখনও আছে, তাই আবার push করতে হবে না
     history.pushState({ view: 'player' }, '');
     return;
   }
-
-  // ── Player খোলা আছে → home এ ফেরো ──
   if ($('playerView').classList.contains('show')) {
     _closePlayer();
-    // home state replace করি
     history.replaceState({ view: 'home' }, '');
     return;
   }
-
-  // ── Home এ আছি → app বন্ধ হওয়া আটকাও ──
-  // আবার base state push করি যেন পরের back এও handle করা যায়
   history.pushState({ view: 'home' }, '');
 });
 
-/* ── Player বন্ধ করার shared helper ── */
 function _closePlayer() {
   clearInterval(adTimer);
   $('adOverlay').classList.remove('show');
@@ -918,12 +875,7 @@ function _closePlayer() {
   renderGrid();
 }
 
-/* ── In-app Back button (player এর ← বাটন) ── */
-window.goHome = () => {
-  // history.back() call করলে popstate fire হবে,
-  // popstate handler ই _closePlayer() call করবে
-  history.back();
-};
+window.goHome = () => { history.back(); };
 $('backBtn').onclick = window.goHome;
 
 /* ══ FILTER ══ */
@@ -943,11 +895,9 @@ window.filterAndGo = cat => {
   $('playerView').classList.remove('show');
   $('homeView').style.display = '';
   currentCat = cat;
-  // Activate correct category pill
   const pill = document.querySelector(`.cat-pill[data-cat="${cat}"]`);
   document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
   if (pill) pill.classList.add('active');
-  // Activate correct nav button
   document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
   const m = { Movie: 'bn-movie', Anime: 'bn-anime', Videos: 'bn-videos' };
   if (m[cat]) $(m[cat])?.classList.add('active');
@@ -968,8 +918,6 @@ $('enterBtn').onclick = () => {
 };
 
 /* ══ FIREBASE LOAD ══ */
-
-// 1) App settings (FB links + categories)
 getDoc(doc(db, 'settings', 'config')).then(snap => {
   if (snap.exists()) {
     AppSettings = snap.data();
@@ -985,19 +933,16 @@ getDoc(doc(db, 'settings', 'config')).then(snap => {
   if (!localStorage.getItem('fs_v')) $('welcomeModal').classList.add('show');
 });
 
-// 2) Ad config — realtime (admin changes apply instantly)
 onSnapshot(doc(db, 'settings', 'ads'), snap => {
   if (snap.exists()) applyAdConfig(snap.data());
 });
 
-// 3) Videos — realtime
 onSnapshot(collection(db, 'videos'), snap => {
   allVideos = [];
   snap.forEach(d => allVideos.push({ id: d.id, ...d.data() }));
   renderGrid();
 });
 
-// Set initial nav active state — Movies is first item
 document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
 $('bn-movie')?.classList.add('active');
 </script>
