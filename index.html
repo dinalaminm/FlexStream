@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>FlexStream — Movies, Anime & Videos</title>
 
-<!-- ✅ OG / Social Share Meta Tags -->
 <meta property="og:title"        content="FlexStream — Movies, Anime & Videos">
 <meta property="og:description"  content="Watch amazing movies, anime and videos for free!">
 <meta property="og:type"         content="website">
@@ -45,7 +44,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 @keyframes pulse   {0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
 @keyframes appsGlow{0%,100%{box-shadow:0 3px 14px rgba(230,57,70,.45)}50%{box-shadow:0 3px 22px rgba(230,57,70,.8)}}
 
-/* ══ MODAL ══ */
+/* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(5,5,8,.95);backdrop-filter:blur(16px);z-index:8000;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-bg.show{display:flex;animation:fadein .35s ease}
 .modal-box{background:var(--card);border:1px solid var(--border2);border-radius:24px;width:100%;max-width:360px;padding:32px 24px 26px;text-align:center;position:relative;overflow:hidden;animation:slideup .42s cubic-bezier(.34,1.56,.64,1)}
@@ -60,7 +59,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .btn-enter{width:100%;padding:12px;background:transparent;border:1px solid var(--border2);color:var(--sub);border-radius:12px;margin-top:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;transition:all .2s}
 .btn-enter:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ══ HEADER ══ */
+/* HEADER */
 .app-header{position:sticky;top:0;z-index:500;background:rgba(5,5,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .header-row{display:flex;align-items:center;justify-content:space-between;padding:13px 16px 11px}
 .brand{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;background:linear-gradient(130deg,#fff 40%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -68,16 +67,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 .icon-btn{background:none;border:none;cursor:pointer;color:var(--sub);padding:7px;border-radius:8px;transition:.2s;display:flex;align-items:center}
 .icon-btn:hover{color:var(--text);background:var(--surface)}
 
-/* ══ APPS BUTTON ══ */
-.apps-btn{
-  display:flex;align-items:center;gap:6px;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#fff;font-size:11px;font-weight:800;letter-spacing:1.2px;
-  padding:7px 14px;border-radius:20px;text-decoration:none;
-  font-family:'DM Sans',sans-serif;white-space:nowrap;
-  animation:appsGlow 2.2s ease-in-out infinite;
-  transition:transform .2s,filter .2s;
-}
+/* APPS BUTTON */
+.apps-btn{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:800;letter-spacing:1.2px;padding:7px 14px;border-radius:20px;text-decoration:none;font-family:'DM Sans',sans-serif;white-space:nowrap;animation:appsGlow 2.2s ease-in-out infinite;transition:transform .2s,filter .2s}
 .apps-btn:hover{transform:translateY(-2px);filter:brightness(1.12)}
 .apps-btn:active{transform:scale(.95)}
 
@@ -209,7 +200,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
 </head>
 <body>
 
-<!-- ══ WELCOME MODAL ══ -->
+<!-- WELCOME MODAL -->
 <div class="modal-bg" id="welcomeModal">
   <div class="modal-box">
     <div class="modal-logo">FlexStream</div>
@@ -227,7 +218,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   </div>
 </div>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
 <header class="app-header">
   <div class="header-row">
     <div class="brand">FlexStream</div>
@@ -237,11 +228,8 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
-      <!-- ✅ APPS বাটন — Firestore থেকে লিংক লোড হবে, নিচে apkLink ফিল্ড সেট করুন -->
       <a href="#" class="apps-btn" id="appsBtn" target="_blank" rel="noopener">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-        </svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
         APPS
       </a>
     </div>
@@ -267,7 +255,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   </div>
 </header>
 
-<!-- ══ HOME VIEW ══ -->
+<!-- HOME VIEW -->
 <div id="homeView">
   <div class="ad-banner-slot" id="bannerAdSlot">
     <div class="ad-slot-label"></div>
@@ -283,7 +271,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   </div>
 </div>
 
-<!-- ══ PLAYER VIEW ══ -->
+<!-- PLAYER VIEW -->
 <div id="playerView">
   <button class="player-back" id="backBtn">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -327,7 +315,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;o
   <div class="sug-list" id="sugList"></div>
 </div>
 
-<!-- ══ BOTTOM NAV ══ -->
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <button class="bnav-item active" id="bn-movie" onclick="filterAndGo('Movie')">
     <div class="bnav-icon">
@@ -380,6 +368,8 @@ const app = initializeApp({
 const db = getFirestore(app);
 
 let allVideos=[], currentCat='all', currentQ='', AppSettings={}, dynamicCats=[], adCfg={}, pendingVideo=null, adTimer=null;
+let entryAdFired = false; // ✅ পেজ লোডে একবারই fire হবে
+
 const $=id=>document.getElementById(id);
 
 function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
@@ -390,6 +380,25 @@ function makePlaceholder(title,cat){
   const[a,b]=p[cat]||['#0a2a3f','#1a5270'];
   const init=title.split(' ').slice(0,2).map(w=>w[0]?.toUpperCase()||'').join('');
   return`data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${a}"/><stop offset="100%" stop-color="${b}"/></linearGradient></defs><rect width="320" height="180" fill="url(#g)"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="54" font-weight="bold" fill="rgba(255,255,255,0.2)">${init}</text><text x="50%" y="76%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.45)" font-weight="700" letter-spacing="2">${cat.toUpperCase()}</text></svg>`)}`;
+}
+
+/* ══════════════════════════════════════════
+   ✅ ENTRY AD — পেজ লোড হলে Direct Link fire
+   Admin → Ad Manager → Popunder ON থাকলে কাজ করবে
+   Cooldown শেষ হলে পরের বার আবার দেখাবে
+══════════════════════════════════════════ */
+function triggerEntryAd() {
+  if (entryAdFired) return;            // একই session-এ একবারই
+  if (!adCfg.popunderEnabled) return;  // Admin থেকে OFF থাকলে কিছু হবে না
+  if (!adCfg.directLink) return;       // লিংক না থাকলে skip
+
+  const coolMs = (parseInt(adCfg.popunderCooldown) || 60) * 1000;
+  const last   = parseInt(sessionStorage.getItem('_entry_pu_t') || '0');
+  if (Date.now() - last < coolMs) return; // Cooldown শেষ না হলে skip
+
+  entryAdFired = true;
+  sessionStorage.setItem('_entry_pu_t', String(Date.now()));
+  try { window.open(adCfg.directLink, '_blank'); } catch(e) {}
 }
 
 /* ══ AD ENGINE ══ */
@@ -408,7 +417,17 @@ function injectScript(container,html){
 }
 function applySocialBar(script){if(!script)return;let el=document.getElementById('_sb_wrap');if(!el){el=document.createElement('div');el.id='_sb_wrap';document.body.appendChild(el);}injectScript(el,script)}
 function applyBanner(script){const slot=$('bannerAdSlot'),inner=$('bannerAdInner');if(!slot||!inner)return;if(!script){slot.classList.remove('show');return;}slot.classList.add('show');injectScript(inner,script)}
-function triggerPopunder(url){if(!url)return;const coolMs=(parseInt(adCfg.popunderCooldown)||60)*1000;const last=parseInt(sessionStorage.getItem('_pu_t')||'0');if(Date.now()-last<coolMs)return;sessionStorage.setItem('_pu_t',String(Date.now()));try{window.open(url,'_blank')}catch(e){}}
+
+function triggerPopunder(url){
+  // ভিডিও ক্লিকেও popunder — আলাদা cooldown key ব্যবহার করে
+  if(!url)return;
+  const coolMs=(parseInt(adCfg.popunderCooldown)||60)*1000;
+  const last=parseInt(sessionStorage.getItem('_pu_t')||'0');
+  if(Date.now()-last<coolMs)return;
+  sessionStorage.setItem('_pu_t',String(Date.now()));
+  try{window.open(url,'_blank')}catch(e){}
+}
+
 function showOverlay(script){
   const overlay=$('adOverlay'),zone=$('adOverlayZone'),skipBtn=$('adSkipBtn'),timerEl=$('adTimer'),skipText=$('adSkipText');
   if(script)injectScript(zone,script);else zone.innerHTML=`<div style="color:#5a5a7a;text-align:center;font-size:13px;font-family:sans-serif"><div style="font-size:40px;margin-bottom:10px">📢</div>Advertisement</div>`;
@@ -418,7 +437,15 @@ function showOverlay(script){
 }
 window.skipAd=()=>{clearInterval(adTimer);$('adOverlay').classList.remove('show');$('adTimer').style.display='inline-flex';if(pendingVideo){startVideoPlayback(pendingVideo);pendingVideo=null}};
 window.skipAdBtn=()=>{window.skipAd();history.replaceState({view:'player'},'')};
-function applyAdConfig(cfg){adCfg=cfg||{};if(cfg.socialBarEnabled&&cfg.socialBarScript)applySocialBar(cfg.socialBarScript);if(cfg.bannerEnabled&&cfg.bannerScript)applyBanner(cfg.bannerScript);else if(!cfg.bannerEnabled)applyBanner(null)}
+
+function applyAdConfig(cfg){
+  adCfg=cfg||{};
+  if(cfg.socialBarEnabled&&cfg.socialBarScript)applySocialBar(cfg.socialBarScript);
+  if(cfg.bannerEnabled&&cfg.bannerScript)applyBanner(cfg.bannerScript);
+  else if(!cfg.bannerEnabled)applyBanner(null);
+  // ✅ Ad config লোড হলেই Entry Ad চেক করো
+  triggerEntryAd();
+}
 
 /* ══ CATEGORY PILLS ══ */
 const catEmoji={Movie:'🎬',Anime:'🌸',Videos:'🎞️'};
@@ -466,6 +493,7 @@ function openPlayer(video){
   window.scrollTo({top:0,behavior:'instant'});
   document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
   pushPlayerState();
+  // ✅ ভিডিও ক্লিকেও popunder (আলাদা cooldown)
   if(adCfg.popunderEnabled&&adCfg.directLink)triggerPopunder(adCfg.directLink);
   if(adCfg.overlayEnabled)showOverlay(adCfg.overlayScript||null);
   else{pendingVideo=null;startVideoPlayback(video);}
@@ -523,10 +551,7 @@ getDoc(doc(db,'settings','config')).then(snap=>{
     AppSettings=snap.data();
     $('fbPageLink').href=AppSettings.facebookPage||'#';
     $('fbGroupLink').href=AppSettings.facebookGroup||'#';
-    // ✅ Firestore-এর config ডকে apkLink ফিল্ড সেট করলে এখানে লোড হবে
-    if(AppSettings.apkLink){
-      $('appsBtn').href=AppSettings.apkLink;
-    }
+    if(AppSettings.apkLink) $('appsBtn').href=AppSettings.apkLink;
     dynamicCats=AppSettings.categories?.length
       ?AppSettings.categories
       :[{name:'Movie',emoji:'🎬'},{name:'Anime',emoji:'🌸'},{name:'Videos',emoji:'🎞️'}];
@@ -537,8 +562,15 @@ getDoc(doc(db,'settings','config')).then(snap=>{
   if(!localStorage.getItem('fs_v'))$('welcomeModal').classList.add('show');
 });
 
-onSnapshot(doc(db,'settings','ads'),snap=>{if(snap.exists())applyAdConfig(snap.data())});
-onSnapshot(collection(db,'videos'),snap=>{allVideos=[];snap.forEach(d=>allVideos.push({id:d.id,...d.data()}));renderGrid()});
+/* ✅ Ad config realtime — লোড হলেই Entry Ad fire হবে */
+onSnapshot(doc(db,'settings','ads'),snap=>{
+  if(snap.exists()) applyAdConfig(snap.data());
+});
+
+onSnapshot(collection(db,'videos'),snap=>{
+  allVideos=[];snap.forEach(d=>allVideos.push({id:d.id,...d.data()}));renderGrid();
+});
+
 document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
 $('bn-movie')?.classList.add('active');
 </script>
