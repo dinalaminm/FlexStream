@@ -33,6 +33,8 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
 @keyframes appsGlow{0%,100%{box-shadow:0 3px 14px rgba(230,57,70,.45)}50%{box-shadow:0 3px 22px rgba(230,57,70,.8)}}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes likePopAnim{0%{transform:scale(1)}40%{transform:scale(1.35)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+@keyframes commentSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
 /* ══ AD GATE ══ */
 #adGate{position:fixed;inset:0;z-index:10000;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s ease}
@@ -142,8 +144,6 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .empty-msg .ei{font-size:44px;margin-bottom:12px}
 #playerView{display:none;padding-bottom:calc(var(--nav-h) + 16px)}
 #playerView.show{display:block;animation:fadein .3s ease}
-.player-back{display:flex;align-items:center;gap:8px;padding:12px 14px 10px;cursor:pointer;color:var(--sub);font-size:14px;font-weight:600;background:none;border:none;font-family:'DM Sans',sans-serif;transition:.2s}
-.player-back:hover{color:var(--text)}
 .player-video-wrap{background:#000;width:100%;position:relative}
 #mainVideo{width:100%;aspect-ratio:16/9;display:block;background:#000;object-fit:contain}
 #adOverlay{display:none;position:absolute;inset:0;z-index:50;background:#000;flex-direction:column;align-items:center;justify-content:center}
@@ -159,13 +159,55 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .player-cat{display:inline-block;padding:3px 9px;border-radius:6px;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
 .player-title{font-size:17px;font-weight:700;line-height:1.35;margin-bottom:6px}
 .player-views{font-size:12px;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:5px}
-.player-actions{display:flex;gap:9px;margin-bottom:2px}
-.p-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 10px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:all .2s}
-.p-btn-share{background:var(--surface);color:var(--sub);border:1px solid var(--border2)}
-.p-btn-share:hover{border-color:var(--teal);color:var(--teal)}
-.p-btn-dl{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(230,57,70,.3)}
-.p-btn-dl:hover{background:#c1121f;transform:translateY(-1px)}
-.divider{height:1px;background:var(--border);margin:16px 14px 14px}
+
+/* ══ LIKE / COMMENT / SHARE ACTIONS ══ */
+.player-actions{display:flex;align-items:center;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:50px;padding:4px 6px;margin-bottom:14px;overflow:hidden}
+.p-action-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 10px;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;color:var(--sub);border-radius:46px;transition:all .22s;position:relative}
+.p-action-btn:hover{background:var(--card2);color:var(--text)}
+.p-action-btn.liked{color:var(--accent)}
+.p-action-btn.liked svg{filter:drop-shadow(0 0 6px rgba(230,57,70,.7))}
+.p-action-btn.liked .like-icon{animation:likePopAnim .4s cubic-bezier(.34,1.56,.64,1)}
+.p-action-btn.disliked{color:#4361ee}
+.p-action-separator{width:1px;height:26px;background:var(--border2);flex-shrink:0;margin:0 2px}
+.like-count{font-size:11px;font-weight:700;min-width:16px}
+
+/* ══ COMMENT SECTION ══ */
+.comment-section{border-top:1px solid var(--border);margin:0 0 8px;padding:0}
+.comment-header{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 10px;cursor:pointer;user-select:none}
+.comment-header-left{display:flex;align-items:center;gap:8px}
+.comment-title{font-size:13px;font-weight:700;color:var(--text)}
+.comment-count-badge{background:var(--surface);border:1px solid var(--border2);color:var(--muted);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.comment-chevron{color:var(--muted);transition:transform .25s;flex-shrink:0}
+.comment-chevron.open{transform:rotate(180deg)}
+.comment-body{display:none;padding:0 12px 14px}
+.comment-body.open{display:block;animation:commentSlide .28s ease}
+.comment-input-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px}
+.comment-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}
+.comment-input-wrap{flex:1;position:relative}
+.comment-input{width:100%;padding:10px 12px;background:var(--surface);border:1px solid var(--border2);color:var(--text);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;resize:none;transition:.2s;min-height:42px;max-height:120px;line-height:1.5}
+.comment-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(230,57,70,.08)}
+.comment-input::placeholder{color:var(--muted)}
+.comment-send-btn{margin-top:8px;float:right;padding:7px 16px;background:var(--accent);color:#fff;border:none;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;display:none}
+.comment-send-btn.visible{display:inline-flex;align-items:center;gap:5px}
+.comment-send-btn:hover{background:#c1121f;transform:translateY(-1px)}
+.comment-send-clear{margin-top:8px;float:left;padding:7px 12px;background:transparent;color:var(--muted);border:none;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:color .2s;display:none}
+.comment-send-clear.visible{display:inline-flex}
+.comment-send-clear:hover{color:var(--text)}
+.comment-actions-row{display:flex;justify-content:flex-end;gap:6px;margin-top:8px;clear:both}
+.comment-list{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.comment-item{display:flex;gap:10px;animation:commentSlide .3s ease}
+.comment-item-avatar{width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--sub);flex-shrink:0;font-family:'Bebas Neue',sans-serif}
+.comment-item-body{flex:1}
+.comment-item-name{font-size:11px;font-weight:700;color:var(--sub);margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.comment-item-time{font-size:10px;color:var(--muted);font-weight:400}
+.comment-item-text{font-size:13px;color:var(--text);line-height:1.5}
+.comment-item-likes{display:flex;align-items:center;gap:5px;margin-top:6px}
+.comment-like-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px;padding:3px 0;transition:color .2s;font-family:'DM Sans',sans-serif}
+.comment-like-btn:hover,.comment-like-btn.liked{color:var(--accent)}
+.comment-no-comments{text-align:center;color:var(--muted);font-size:13px;padding:20px 0 8px}
+.comment-no-comments .en{font-size:30px;margin-bottom:8px}
+
+.divider{height:1px;background:var(--border);margin:4px 14px 14px}
 .sug-label{padding:0 14px 10px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .sug-list{display:flex;flex-direction:column;gap:10px;padding:0 10px}
 .sug-card{display:flex;gap:10px;background:var(--card);border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:all .2s}
@@ -191,7 +233,7 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 </head>
 <body>
 
-<!-- ✅ AD GATE — সাইট লোডের আগে দেখাবে -->
+<!-- ✅ AD GATE -->
 <div id="adGate">
   <div class="ag-loading" id="agLoading">
     <div class="ag-logo">FlexStream</div>
@@ -289,10 +331,6 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 
 <!-- PLAYER VIEW -->
 <div id="playerView">
-  <button class="player-back" id="backBtn">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Back
-  </button>
   <div class="player-video-wrap">
     <div id="adOverlay">
       <div class="ad-tag">📢 AD</div>
@@ -311,17 +349,69 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       <span id="playerViewsText">0 views</span>
     </div>
+
+    <!-- ✅ LIKE / DISLIKE / COMMENT / SHARE BAR -->
     <div class="player-actions">
-      <button class="p-btn p-btn-share" id="shareBtn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
+      <!-- Like -->
+      <button class="p-action-btn" id="likeBtn" onclick="toggleLike()">
+        <span class="like-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22V11M2 13v7a2 2 0 0 0 2 2h11.172a2 2 0 0 0 1.944-1.515l1.5-6A2 2 0 0 0 16.672 11H13V5a2 2 0 0 0-2-2h-.172a2 2 0 0 0-1.946 1.628L7 11"/></svg>
+        </span>
+        <span class="like-count" id="likeCount">0</span>
+      </button>
+      <div class="p-separator" style="width:1px;height:26px;background:var(--border2);flex-shrink:0;margin:0 2px"></div>
+      <!-- Dislike -->
+      <button class="p-action-btn" id="dislikeBtn" onclick="toggleDislike()" style="flex:0;padding:9px 12px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2v11M22 11V4a2 2 0 0 0-2-2H8.828a2 2 0 0 0-1.944 1.515l-1.5 6A2 2 0 0 0 7.328 13H11v6a2 2 0 0 0 2 2h.172a2 2 0 0 0 1.946-1.628L17 13"/></svg>
+      </button>
+      <div class="p-separator" style="width:1px;height:26px;background:var(--border2);flex-shrink:0;margin:0 2px"></div>
+      <!-- Comment -->
+      <button class="p-action-btn" onclick="toggleCommentSection()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span id="commentCountBtn">0</span>
+      </button>
+      <div class="p-separator" style="width:1px;height:26px;background:var(--border2);flex-shrink:0;margin:0 2px"></div>
+      <!-- Share -->
+      <button class="p-action-btn" id="shareBtn" onclick="handleShare()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         Share
       </button>
-      <a href="#" id="dlBtn" target="_blank" rel="noopener" class="p-btn p-btn-dl">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Download
-      </a>
     </div>
   </div>
+
+  <!-- ✅ COMMENT SECTION -->
+  <div class="comment-section" id="commentSection">
+    <div class="comment-header" onclick="toggleCommentSection()">
+      <div class="comment-header-left">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div class="comment-title">মন্তব্য</div>
+        <div class="comment-count-badge" id="commentCountBadge">0</div>
+      </div>
+      <svg class="comment-chevron" id="commentChevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="comment-body" id="commentBody">
+      <div class="comment-input-row">
+        <div class="comment-avatar" id="userAvatar">আ</div>
+        <div class="comment-input-wrap">
+          <textarea class="comment-input" id="commentInput" placeholder="একটি মন্তব্য যোগ করুন..." rows="1" oninput="onCommentInput(this)" onfocus="showCommentBtns()" onblur="hideCommentBtnsDelay()"></textarea>
+          <div class="comment-actions-row" id="commentActionRow" style="display:none">
+            <button class="comment-send-clear visible" id="commentCancelBtn" onmousedown="cancelComment()">বাতিল</button>
+            <button class="comment-send-btn visible" id="commentSubmitBtn" onmousedown="submitComment()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              মন্তব্য করুন
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="comment-list" id="commentList">
+        <div class="comment-no-comments">
+          <div class="en">💬</div>
+          <p>এখনো কোনো মন্তব্য নেই<br>প্রথম মন্তব্য করুন!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="divider"></div>
   <div class="sug-label">সাজেস্টেড ভিডিও</div>
   <div class="sug-list" id="sugList"></div>
@@ -365,6 +455,13 @@ let allVideos=[], currentCat='all', currentQ='', AppSettings={}, dynamicCats=[],
 let gateDone = false;
 let gateInterval = null;
 
+// Like / Comment state (local session)
+let likedVideos = JSON.parse(localStorage.getItem('_liked')||'{}');
+let dislikedVideos = JSON.parse(localStorage.getItem('_disliked')||'{}');
+let videoComments = JSON.parse(localStorage.getItem('_comments')||'{}');
+let videoLikes = JSON.parse(localStorage.getItem('_vLikes')||'{}');
+let currentVideoId = null;
+
 const $=id=>document.getElementById(id);
 
 function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600)}
@@ -377,53 +474,186 @@ function makePlaceholder(title,cat){
   return`data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${a}"/><stop offset="100%" stop-color="${b}"/></linearGradient></defs><rect width="320" height="180" fill="url(#g)"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="54" font-weight="bold" fill="rgba(255,255,255,0.2)">${init}</text><text x="50%" y="76%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.45)" font-weight="700" letter-spacing="2">${cat.toUpperCase()}</text></svg>`)}`;
 }
 
-/* ════════════════════════════════════════
-   ✅ AD GATE ENGINE
-   সাইটে ঢুকলে আগে Ad Gate দেখাবে।
-   Admin → Popunder ON + Direct Link থাকলে:
-     → নতুন ট্যাবে Ad খুলবে
-     → Countdown শেষে Skip করা যাবে
-   Popunder OFF থাকলে: Gate সরাসরি বন্ধ
-   Cooldown শেষ না হলে: Gate দেখাবে না
-════════════════════════════════════════ */
-function startAdGate(cfg) {
-  if (gateDone) return;
+/* ══ LIKE / DISLIKE / COMMENT / SHARE ══ */
+window.toggleLike = () => {
+  if(!currentVideoId) return;
+  const btn = $('likeBtn');
+  const wasLiked = likedVideos[currentVideoId];
+  if(wasLiked){
+    delete likedVideos[currentVideoId];
+    videoLikes[currentVideoId] = Math.max(0,(videoLikes[currentVideoId]||0)-1);
+    btn.classList.remove('liked');
+  } else {
+    likedVideos[currentVideoId] = true;
+    delete dislikedVideos[currentVideoId];
+    videoLikes[currentVideoId] = (videoLikes[currentVideoId]||0)+1;
+    btn.classList.add('liked');
+    $('dislikeBtn').classList.remove('disliked');
+    btn.querySelector('.like-icon').classList.remove('liked');
+    void btn.querySelector('.like-icon').offsetWidth;
+    btn.querySelector('.like-icon').classList.add('liked');
+  }
+  localStorage.setItem('_liked', JSON.stringify(likedVideos));
+  localStorage.setItem('_disliked', JSON.stringify(dislikedVideos));
+  localStorage.setItem('_vLikes', JSON.stringify(videoLikes));
+  updateLikeUI();
+};
 
-  const coolMs = (parseInt(cfg.popunderCooldown) || 60) * 1000;
-  const last   = parseInt(sessionStorage.getItem('_gate_t') || '0');
+window.toggleDislike = () => {
+  if(!currentVideoId) return;
+  const btn = $('dislikeBtn');
+  const wasDisliked = dislikedVideos[currentVideoId];
+  if(wasDisliked){
+    delete dislikedVideos[currentVideoId];
+    btn.classList.remove('disliked');
+  } else {
+    dislikedVideos[currentVideoId] = true;
+    delete likedVideos[currentVideoId];
+    if(videoLikes[currentVideoId] > 0) videoLikes[currentVideoId]--;
+    btn.classList.add('disliked');
+    $('likeBtn').classList.remove('liked');
+    localStorage.setItem('_vLikes', JSON.stringify(videoLikes));
+  }
+  localStorage.setItem('_liked', JSON.stringify(likedVideos));
+  localStorage.setItem('_disliked', JSON.stringify(dislikedVideos));
+  updateLikeUI();
+};
 
-  // Popunder OFF বা Cooldown শেষ না হলে → Gate বন্ধ
-  if (!cfg.popunderEnabled || !cfg.directLink || (Date.now() - last < coolMs)) {
-    dismissGate();
+function updateLikeUI(){
+  if(!currentVideoId) return;
+  const count = videoLikes[currentVideoId] || 0;
+  const fmt = count >= 1000 ? (count/1000).toFixed(1)+'K' : String(count);
+  $('likeCount').textContent = fmt;
+  $('likeBtn').classList.toggle('liked', !!likedVideos[currentVideoId]);
+  $('dislikeBtn').classList.toggle('disliked', !!dislikedVideos[currentVideoId]);
+}
+
+window.handleShare = () => {
+  if(navigator.share){
+    navigator.share({title:$('playerTitle').textContent||'FlexStream',url:location.href});
+  } else {
+    navigator.clipboard?.writeText(location.href);
+    showToast('🔗 Link copied!');
+  }
+};
+
+/* ══ COMMENT SECTION ══ */
+window.toggleCommentSection = () => {
+  const body = $('commentBody');
+  const chevron = $('commentChevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+  if(!isOpen) $('commentInput').focus();
+};
+
+window.onCommentInput = (el) => {
+  el.style.height='auto';
+  el.style.height=el.scrollHeight+'px';
+};
+
+window.showCommentBtns = () => {
+  $('commentActionRow').style.display='flex';
+};
+
+window.hideCommentBtnsDelay = () => {
+  // delayed so mousedown on button fires first
+  setTimeout(()=>{
+    if(document.activeElement !== $('commentInput') && !$('commentInput').value.trim()){
+      $('commentActionRow').style.display='none';
+    }
+  }, 200);
+};
+
+window.cancelComment = () => {
+  $('commentInput').value='';
+  $('commentInput').style.height='auto';
+  $('commentActionRow').style.display='none';
+  $('commentInput').blur();
+};
+
+window.submitComment = () => {
+  const input = $('commentInput');
+  const text = input.value.trim();
+  if(!text || !currentVideoId) return;
+  if(!videoComments[currentVideoId]) videoComments[currentVideoId]=[];
+  const comment = {
+    text, name:'আপনি', time: Date.now(), likes:0
+  };
+  videoComments[currentVideoId].unshift(comment);
+  localStorage.setItem('_comments', JSON.stringify(videoComments));
+  input.value='';
+  input.style.height='auto';
+  $('commentActionRow').style.display='none';
+  renderComments();
+  showToast('✅ মন্তব্য যোগ হয়েছে!');
+};
+
+function renderComments(){
+  if(!currentVideoId) return;
+  const list = videoComments[currentVideoId]||[];
+  const count = list.length;
+  $('commentCountBadge').textContent = count;
+  $('commentCountBtn').textContent = count;
+  const el = $('commentList');
+  if(!count){
+    el.innerHTML=`<div class="comment-no-comments"><div class="en">💬</div><p>এখনো কোনো মন্তব্য নেই<br>প্রথম মন্তব্য করুন!</p></div>`;
     return;
   }
+  el.innerHTML = list.map((c,i)=>{
+    const mins = Math.floor((Date.now()-c.time)/60000);
+    const timeStr = mins < 1 ? 'এইমাত্র' : mins < 60 ? `${mins} মিনিট আগে` : mins < 1440 ? `${Math.floor(mins/60)} ঘন্টা আগে` : `${Math.floor(mins/1440)} দিন আগে`;
+    const initials = c.name.slice(0,1);
+    return `<div class="comment-item">
+      <div class="comment-item-avatar" style="background:linear-gradient(135deg,#4361ee,#06d6a0)">${initials}</div>
+      <div class="comment-item-body">
+        <div class="comment-item-name">${c.name}<span class="comment-item-time">${timeStr}</span></div>
+        <div class="comment-item-text">${c.text.replace(/</g,'&lt;')}</div>
+        <div class="comment-item-likes">
+          <button class="comment-like-btn ${c._liked?'liked':''}" onclick="likeComment(${i})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="${c._liked?'currentColor':'none'}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 22V11M2 13v7a2 2 0 0 0 2 2h11.172a2 2 0 0 0 1.944-1.515l1.5-6A2 2 0 0 0 16.672 11H13V5a2 2 0 0 0-2-2h-.172a2 2 0 0 0-1.946 1.628L7 11"/></svg>
+            ${c.likes>0?c.likes:''}
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
 
+window.likeComment = (i) => {
+  if(!currentVideoId || !videoComments[currentVideoId]) return;
+  const c = videoComments[currentVideoId][i];
+  if(c._liked){ c._liked=false; c.likes=Math.max(0,c.likes-1); }
+  else { c._liked=true; c.likes=(c.likes||0)+1; }
+  localStorage.setItem('_comments', JSON.stringify(videoComments));
+  renderComments();
+};
+
+/* ══ AD GATE ENGINE ══ */
+function startAdGate(cfg) {
+  if (gateDone) return;
+  const coolMs = (parseInt(cfg.popunderCooldown) || 60) * 1000;
+  const last   = parseInt(sessionStorage.getItem('_gate_t') || '0');
+  if (!cfg.popunderEnabled || !cfg.directLink || (Date.now() - last < coolMs)) {
+    dismissGate(); return;
+  }
   gateDone = true;
   sessionStorage.setItem('_gate_t', String(Date.now()));
-
-  // Loading সরাও, Ad screen দেখাও
   $('agLoading').style.display = 'none';
   $('agAdWrap').classList.add('show');
-
-  // Direct Link নতুন ট্যাবে খোলো
   try { window.open(cfg.directLink, '_blank'); } catch(e) {}
-
-  // Countdown
   const skipDelay = parseInt(cfg.skipDelay) || 5;
   const timerNum  = $('agTimerNum');
   const skipBtn   = $('agSkipBtn');
   const circle    = $('agTimerCircle');
-
   timerNum.textContent = skipDelay;
   skipBtn.disabled = true;
   circle.style.transition = 'none';
   circle.style.strokeDashoffset = '126';
-
   requestAnimationFrame(() => requestAnimationFrame(() => {
     circle.style.transition = `stroke-dashoffset ${skipDelay}s linear`;
     circle.style.strokeDashoffset = '0';
   }));
-
   let rem = skipDelay;
   clearInterval(gateInterval);
   gateInterval = setInterval(() => {
@@ -436,14 +666,12 @@ function startAdGate(cfg) {
     }
   }, 1000);
 }
-
 window.closeAdGate = () => {
   clearInterval(gateInterval);
   const g = $('adGate');
   g.classList.add('hide');
   setTimeout(() => { g.style.display = 'none'; }, 500);
 };
-
 function dismissGate() {
   gateDone = true;
   $('adGate').style.display = 'none';
@@ -500,12 +728,19 @@ function renderGrid(){
 async function incrementView(id){try{await updateDoc(doc(db,'videos',id),{views:increment(1)})}catch(e){}}
 
 function openPlayer(video){
+  currentVideoId = video.id;
   pendingVideo=video;
   const catEl=$('playerCat');catEl.textContent=video.category;catEl.className=`player-cat ${catClass(video.category)}`;
   $('playerTitle').textContent=video.title;const local=allVideos.find(v=>v.id===video.id);
   $('playerViewsText').textContent=fmtViews(local?.views||video.views||0);
-  $('dlBtn').href=video.downloadUrl||'#';
-  $('shareBtn').onclick=()=>{if(navigator.share)navigator.share({title:video.title,url:location.href});else{navigator.clipboard?.writeText(location.href);showToast('🔗 Link copied!')}};
+
+  // reset like/comment UI
+  updateLikeUI();
+  renderComments();
+  // close comment section
+  $('commentBody').classList.remove('open');
+  $('commentChevron').classList.remove('open');
+
   const same=allVideos.filter(v=>v.id!==video.id&&v.category===video.category).sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,7);
   const others=allVideos.filter(v=>v.id!==video.id&&v.category!==video.category).sort(()=>Math.random()-.5).slice(0,3);
   $('sugList').innerHTML=[...same,...others].slice(0,10).map(sv=>{const fb=makePlaceholder(sv.title,sv.category);const ts=sv.thumbnailUrl||fb;return`<div class="sug-card" data-id="${sv.id}"><div class="sug-thumb"><img src="${ts}" alt="${sv.title}" loading="lazy" onerror="this.src='${fb}'"></div><div class="sug-info"><div class="sug-title">${sv.title}</div><div><span class="sug-cat ${catClass(sv.category)}">${sv.category}</span></div>${(sv.views||0)>0?`<div class="sug-views">${fmtViews(sv.views)}</div>`:''}</div></div>`;}).join('')||`<p style="padding:20px;color:var(--muted);font-size:13px;text-align:center">No suggestions</p>`;
@@ -534,16 +769,13 @@ window.addEventListener('popstate',e=>{
 });
 
 function _closePlayer(){
-  clearInterval(adTimer);$('adOverlay').classList.remove('show');$('adTimer').style.display='inline-flex';pendingVideo=null;
+  clearInterval(adTimer);$('adOverlay').classList.remove('show');$('adTimer').style.display='inline-flex';pendingVideo=null;currentVideoId=null;
   const vid=$('mainVideo');vid.pause();vid.src='';
   $('playerView').classList.remove('show');$('homeView').style.display='';
   document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
   const navMap={Movie:'bn-movie',Anime:'bn-anime',Videos:'bn-videos'};const activeNav=navMap[currentCat];if(activeNav)$(activeNav)?.classList.add('active');
   renderGrid();
 }
-
-window.goHome=()=>{history.back()};
-$('backBtn').onclick=window.goHome;
 
 window.filterCat=(cat,btn)=>{currentCat=cat;document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));if(btn)btn.classList.add('active');renderGrid()};
 window.filterAndGo=cat=>{
@@ -572,11 +804,10 @@ getDoc(doc(db,'settings','config')).then(snap=>{
   if(!localStorage.getItem('fs_v'))$('welcomeModal').classList.add('show');
 });
 
-/* ✅ Ad config লোড হলে Gate চালু হবে */
 onSnapshot(doc(db,'settings','ads'),snap=>{
   if(snap.exists()){
     applyAdConfig(snap.data());
-    startAdGate(snap.data()); // Gate check
+    startAdGate(snap.data());
   } else {
     dismissGate();
   }
@@ -586,7 +817,6 @@ onSnapshot(collection(db,'videos'),snap=>{allVideos=[];snap.forEach(d=>allVideos
 document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
 $('bn-movie')?.classList.add('active');
 
-// Fallback — ৬ সেকেন্ডে config না আসলে Gate বন্ধ
 setTimeout(()=>{ if(!gateDone) dismissGate(); }, 6000);
 </script>
 </body>
